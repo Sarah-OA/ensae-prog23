@@ -105,13 +105,16 @@ class Graph:
         chemins = []
         while file != []:
             sommet, chemin = file.pop(0)
+            print(file)
             for t in self.graph[sommet]:
                 if t[2]<= power:
                     if t[0] == dest:
                         chemins.append(chemin + [t[0]])
+                        file=[]
                     else:
-                        file.append((t[0], chemin + [t[0]]))
-        return chemin[0]
+                        file.append((t[0], chemin + [t[0]]))          
+        return chemins[]
+            
 
 
 
@@ -143,3 +146,5 @@ def graph_from_file(filename):
         else:
             g.add_edge(int(words[0]), int(words[1]), int(words[2]), int(words[3]))
     return(g)
+
+
