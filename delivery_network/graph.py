@@ -83,16 +83,13 @@ class Graph:
         Should return path, min_power. 
         """
         i = 0
-        while get_path_with_power(self, src, dest, 2**i)!=[]:
+        while self.get_path_with_power(src, dest, 2**i)!=[]:
             i = i + 1
         a = 2**i
         b = 2**(i-1)
         for k in range(a,b,-1):
-            if get_path_with_power(self, src, dest, k) == []:
+            if get_path_with_power(src, dest, k) == []:
                 return k
-        
-
-        raise NotImplementedError
 
     def get_path_with_power(self, src, dest, power):    
         for l in self.connected_components() :
@@ -113,7 +110,7 @@ class Graph:
                         file=[]
                     else:
                         file.append((t[0], chemin + [t[0]]))          
-        return chemins[]
+        return chemins[0]
             
 
 
