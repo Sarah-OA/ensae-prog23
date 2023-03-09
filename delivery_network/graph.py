@@ -83,13 +83,13 @@ class Graph:
         Should return path, min_power. 
         """
         i = 0
-        while self.get_path_with_power(src, dest, 2**i)!=[]:
+        while self.get_path_with_power(src, dest, 2**i) == None:
             i = i + 1
         a = 2**i
         b = 2**(i-1)
         for k in range(a,b,-1):
-            if self.get_path_with_power(src, dest, k) == []:
-                return k
+            if self.get_path_with_power(src, dest, k) == None:
+                return (k+1)
 
     def get_path_with_power(self, src, dest, power):    
         for l in self.connected_components() :
@@ -106,7 +106,6 @@ class Graph:
             for t in self.graph[sommet]:
                 if t[0] not in deja_vu :
                     if t[1]<= power:
-                        print("chemin = ", chemin)
                         if t[0] == dest:
                             chemins.append(chemin + [t[0]])
                             return chemins
@@ -144,4 +143,4 @@ def graph_from_file(filename):
             g.add_edge(int(words[0]), int(words[1]), int(words[2]))
         else:
             g.add_edge(int(words[0]), int(words[1]), int(words[2]), int(words[3]))
-    return(g)​
+    return(g)
