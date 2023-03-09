@@ -88,7 +88,7 @@ class Graph:
         a = 2**i
         b = 2**(i-1)
         for k in range(a,b,-1):
-            if get_path_with_power(src, dest, k) == []:
+            if self.get_path_with_power(src, dest, k) == []:
                 return k
 
     def get_path_with_power(self, src, dest, power):    
@@ -98,20 +98,22 @@ class Graph:
                     return None
         file = []
         file.append((src,[src]))
-        print(file)
         chemins = []
+        deja_vu =[]
         while file != []:
             sommet, chemin = file.pop(0)
-            print(file)
+            deja_vu.append(sommet)
             for t in self.graph[sommet]:
-                if t[2]<= power:
-                    if t[0] == dest:
-                        chemins.append(chemin + [t[0]])
-                        file=[]
-                    else:
-                        file.append((t[0], chemin + [t[0]]))          
-        return chemins[0]
-            
+                if t[0] not in deja_vu :
+                    if t[1]<= power:
+                        print("chemin = ", chemin)
+                        if t[0] == dest:
+                            chemins.append(chemin + [t[0]])
+                            return chemins
+                            file=[]
+                        else:
+                            file.append((t[0], chemin + [t[0]]))   
+        return None
 
 
 
@@ -142,6 +144,4 @@ def graph_from_file(filename):
             g.add_edge(int(words[0]), int(words[1]), int(words[2]))
         else:
             g.add_edge(int(words[0]), int(words[1]), int(words[2]), int(words[3]))
-    return(g)
-
-
+    return(g)​
