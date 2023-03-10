@@ -1,5 +1,5 @@
 from os import chdir
-chdir("/home/onyxia/work/ensae-prog23-1/delivery_network")
+chdir("/home/onyxia/work/ensae-prog23/delivery_network")
 
 from graph import Graph, graph_from_file
 from time import perf_counter
@@ -32,26 +32,40 @@ def estimation_temps_minpower(routes):
     g=graph_from_file("/home/onyxia/work/ensae-prog23/input/network.2.in")
     trajets=lire_routes(routes)
     for i in range(1,10):
+        print("coucou")
         src, dest = trajets[i]
         src = int(src)
         dest = int(dest)
         g.min_power(src, dest)
+        print("min power ok :)")
     t2=perf_counter()
     temps_minpower=((t2-t1)/10)*len(trajets)
     return temps_minpower
 
-def estimation_temps_gpwp(routes):
-    t1=perf_counter()
-    g=graph_from_file("/home/onyxia/work/ensae-prog23/input/network.1.in")
-    trajets=lire_routes(routes)
-    for i in range(1,10):
-        src, dest = trajets[i]
-        src = int(src)
-        dest = int(dest)
-        g.get_path_with_power(src, dest, min_power(src,dest))
-    t2=perf_counter()
-    temps_gpwp=((t2-t1)/10)*len(trajets)
-    return temps_gpwp
-test=open("/home/onyxia/work/ensae-prog23-1/input/routes.1.in", "r", encoding="utf-8")
+test=open("/home/onyxia/work/ensae-prog23/input/routes.1.in", "r", encoding="utf-8")
 print(estimation_temps_minpower(test))
-print(estimation_temps_gpwp(test))
+test.close()
+test=open("/home/onyxia/work/ensae-prog23/input/routes.2.in", "r", encoding="utf-8")
+print(estimation_temps_minpower(test))
+test.close()
+test=open("/home/onyxia/work/ensae-prog23/input/routes.3.in", "r", encoding="utf-8")
+print(estimation_temps_minpower(test))
+test.close()
+test=open("/home/onyxia/work/ensae-prog23/input/routes.4.in", "r", encoding="utf-8")
+print(estimation_temps_minpower(test))
+test.close()
+test=open("/home/onyxia/work/ensae-prog23/input/routes.5.in", "r", encoding="utf-8")
+print(estimation_temps_minpower(test))
+test.close()
+test=open("/home/onyxia/work/ensae-prog23/input/routes.6.in", "r", encoding="utf-8")
+print(estimation_temps_minpower(test))
+test.close()
+test=open("/home/onyxia/work/ensae-prog23/input/routes.7.in", "r", encoding="utf-8")
+print(estimation_temps_minpower(test))
+test.close()
+test=open("/home/onyxia/work/ensae-prog23/input/routes.8.in", "r", encoding="utf-8")
+print(estimation_temps_minpower(test))
+test.close()
+test=open("/home/onyxia/work/ensae-prog23/input/routes.9.in", "r", encoding="utf-8")
+print(estimation_temps_minpower(test))
+test.close()

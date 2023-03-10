@@ -85,17 +85,19 @@ class Graph:
         i = 0
         while self.get_path_with_power(src, dest, 2**i) == None:
             i = i + 1
-        a = 2**i
-        b = 2**(i-1)
-        for k in range(a,b,-1):
-            if self.get_path_with_power(src, dest, k) == None:
-                return (k+1)
+        a = 2**(i-1)
+        b = 2**i
+        c=0
+        while b>a:
+            c=(a+b)//2
+            if self.get_path_with_power(src, dest, c)==None:
+                a=c+1
+            else:
+                b=c
+        return (c, self.get_path_with_power(src, dest, c))
+        
 
     def get_path_with_power(self, src, dest, power):    
-        for l in self.connected_components() :
-            if src in l:
-                if dest not in l:
-                    return None
         file = []
         file.append((src,[src]))
         chemins = []
