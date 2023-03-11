@@ -1,4 +1,6 @@
-# This will work if ran from the root folder.
+    """
+    Test de la fonction graph_from_file
+    """
 import sys 
 sys.path.append("delivery_network/")
 

@@ -1,4 +1,6 @@
-# This will work if ran from the root folder.
+"""
+    Test de la fonction get_path_with_power
+"""
 import sys 
 sys.path.append("delivery_network")
 
