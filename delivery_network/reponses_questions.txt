@@ -1,25 +1,54 @@
 Réponses aux questions du projet de programmation :
 
 S1Q1 : voir graph.py et test_s1q1_graph_loading.py
+
 S2Q2 : voir graph.py  et test_s1q2_connected_components.py
+
 S1Q3 : voir graph.py et test_s1q3_node_reachable.py
 Complexité de l'algorithme : 
-on regarde les voisins de chaque sommet. Les autres opérations sont de complexité O(1).
+La majorité des opérations sont de complexité O(1). Les boucles for et while doivent être analysées dans le pire des cas. 
+Dans le pire des cas, la file a tous les éléments du graphe une fois : complexité O(nb_nodes). 
+Dans le pire des cas, la boucle for visite toutes les arètes du graphe une fois : complexité O(nb_edges).
+Complexité totale : O(nb_nodes + nb_edges)
+
+
 S1Q4 : voir graph.py et test_s1q4_graph_loading2.py
+
 S1Q5 : non traitée
+
 S1Q6 : voir graph.py et test_s1q6_minimal_power.py
-Complexité de l'algorithme :
+Complexité de l'algorithme : dans la première partie avec les puissances de 2, dans le pire des cas, on teste la condition while log(i) fois,
+avec i tel que 2**log(i) > max des puissances du graphe.
+La condition est de complexité O(nb_nodes+nb_edges). D'où la complexité de la première partie : O(log(i)*(nb_nodes+nb_edges))
+La recherche dichotomique est de complexité O(log(2**i-2**(i-1)))=O(log(i)). La deuxième partie est donc de complexité O(log(i)*(nb_edges+nb_nodes)).
+Complexité totale : O(log(i)*(nb_nodes+nb_edges))
+
 S1Q7 : non traitée
+
 S1Q8 : voir test_s1q8_checking
+
 S1Q9 : non traitée
+
 S2Q10 : temps nécessaire pour calculer les trajets des fichiers routes
 routes 1 : 4668.014040579088
 à partir du fichier routes_2, le calcul prend plus de 15 minutes et est donc trop long.
 voir test_s2q10_time_measurement
+
 S1Q11 : non traitée
+
 S2Q12 : voir graph.py et test_s2q2_kruskal.py
 Complexité de l'algorithme : 
+Complexité de trouve_la_racine : O(nb_nodes) (parcourt tout le graphe dans le pire des cas).
+Complexité de union : O(nb_nodes) (opérations de complexité O(1) sauf trouve_la_racine)
+Complexité du tri dans kruskal : O(nb_edges*log(nb_edges)) (pire complexité de la fonction sorted).
+Complexité de la boucle for : O(nb_nodes)
+Complexité de la boucle while : O(nb_nodes)
+-> Complexité de kruskal : O(max(nb_nodes, nb_edges*log(nb_edges))). 
+Il y a souvent plus d'arètes que de sommets dans les graphes proposés, donc kruskal aurait une complexité de O(nb_edges*log(nb_edges))
+
 S2Q13 : voir test_s2q13_kruskal.py
-S2Q14 : voir graph.py
+
+S2Q14 : voir graph.py et test_s2q14_min_power_kruskal.py.
+
 S2Q15 : complexité de l'algorithme de la question 14 :
 Comparaison des temps d'exécution avec la question 10 : 
