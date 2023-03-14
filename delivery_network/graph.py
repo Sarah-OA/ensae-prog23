@@ -1,9 +1,13 @@
+""" Définition de la classe Graph 
+"""
+
 class Graph:
     def __init__(self, nodes=[]):
         self.nodes = nodes
         self.graph = dict([(n, []) for n in nodes])
         self.nb_nodes = len(nodes)
         self.nb_edges = 0
+        self.edges=[]
     
 
     def __str__(self):
@@ -40,6 +44,7 @@ class Graph:
         else: 
             self.graph[node2]=[[node1, power_min, dist]]
             self.nb_nodes+=1
+        self.edges.append([node1, node2, power_min])
         self.nb_edges+=1
 
     
@@ -131,23 +136,47 @@ class Graph:
                             file.append((t[0], chemin + [t[0]])) # ajoute le voisin à la file à examiner et au chemin en construction 
         return None
 
+    def trouve_la_racine(self, parent, i):
+        if parent[i] == i:
+            return i
+        return self.trouve_la_racine(parent, parent[i])
+    
+    def union(self, parent, rank, x, y):
+        x_racine = self.trouve_la_racine(parent, x)
+        y_racine = self.trouve_la_racine(parent, y)
+        if rank[x_racine]<rank[y_racine]:
+            parent[x_racine]=y_racine
+        elif rank[x_racine]>rank[y_racine]:
+            parent[y_racine]=x_racine
+        else:
+            parent[y_racine] = x_racine
+            rank[x_racine] += 1   
+
+    def kruskal(self):
+        mst = Graph([])
+        i=0
+        e=0
+        liste_trajets_ranges = sorted(self.edges, key=lambda item: item[2])
+        parent =[]
+        rank=[]
+        for j in range(self.nb_nodes+1):
+            parent.append(j)
+            rank.append(0)
+        while e < (self.nb_nodes - 1) and i < len(liste_trajets_ranges):
+            u, v, w = liste_trajets_ranges[i]
+            i = i + 1
+            x = self.trouve_la_racine(parent, u)
+            y = self.trouve_la_racine(parent, v)
+            
+            if x!= y:
+                e = e+1
+                mst.add_edge(u,v,w)
+                mst.union(parent, rank, x, y)
+        return mst
+
+        
+
 def graph_from_file(filename):
-    """
-    Reads a text file and returns the graph as an object of the Graph class.
-    The file should have the following format: 
-        The first line of the file is 'n m'
-        The next m lines have 'node1 node2 power_min dist' or 'node1 node2 power_min' (if dist is missing, it will be set to 1 by default)
-        The nodes (node1, node2) should be named 1..n
-        All values are integers.
-    Parameters: 
-    -----------
-    filename: str
-        The name of the file
-    Outputs: 
-    -----------
-    G: Graph
-        An object of the class Graph with the graph from file_name.
-    """
     file = open(filename,'r', encoding="utf-8")
     lines = file.readlines()
     file.close()
@@ -159,32 +188,3 @@ def graph_from_file(filename):
         else:
             g.add_edge(int(words[0]), int(words[1]), int(words[2]), int(words[3]))
     return(g)
-
-    def kruskal(g):
-        g_mst=0
-        return g_mst
-    
-    def get_path_with_power_kruskal(self, src, dest, power):
-        """
-        Adaptation de la fonction get_path_with_power à l'arbre couvrant de poids minimal.
-        """
-        return 'coucou'
-    
-    def min_power_kruskal(self, src, dest):
-        """
-        Adaptation de la fonction min_power à l'arbre couvrant de poids minimal.
-        On utilise la fonction get_path_with_power_kruskal plutôt que la fonction get_path_with_power.
-        """
-        i = 0
-        while self.get_path_with_power_kruskal(src, dest, 2**i) == None:
-            i = i + 1
-        a = 2**(i-1)
-        b = 2**i
-        c=0
-        while b>a:
-            c=(a+b)//2
-            if self.get_path_with_power_kruskal(src, dest, c)==None:
-                a=c+1
-            else:
-                b=c
-        return b, self.get_path_with_power_kruskal(src, dest, b)

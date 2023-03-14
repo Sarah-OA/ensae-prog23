@@ -1,6 +1,8 @@
     """
     Test des fonctions graph_from_file, get_path_with_power et min_power avec un graphe simple et un graphe plus complexe.
     """
+from os import chdir
+chdir("/home/onyxia/work/ensae-prog23/delivery_network")
 
 from graph import graph_from_file
 import unittest   # The test framework

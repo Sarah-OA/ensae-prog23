@@ -1,0 +1,25 @@
+Réponses aux questions du projet de programmation :
+
+S1Q1 : voir graph.py et test_s1q1_graph_loading.py
+S2Q2 : voir graph.py  et test_s1q2_connected_components.py
+S1Q3 : voir graph.py et test_s1q3_node_reachable.py
+Complexité de l'algorithme : 
+on regarde les voisins de chaque sommet. Les autres opérations sont de complexité O(1).
+S1Q4 : voir graph.py et test_s1q4_graph_loading2.py
+S1Q5 : non traitée
+S1Q6 : voir graph.py et test_s1q6_minimal_power.py
+Complexité de l'algorithme :
+S1Q7 : non traitée
+S1Q8 : voir test_s1q8_checking
+S1Q9 : non traitée
+S2Q10 : temps nécessaire pour calculer les trajets des fichiers routes
+routes 1 : 4668.014040579088
+à partir du fichier routes_2, le calcul prend plus de 15 minutes et est donc trop long.
+voir test_s2q10_time_measurement
+S1Q11 : non traitée
+S2Q12 : voir graph.py et test_s2q2_kruskal.py
+Complexité de l'algorithme : 
+S2Q13 : voir test_s2q13_kruskal.py
+S2Q14 : voir graph.py
+S2Q15 : complexité de l'algorithme de la question 14 :
+Comparaison des temps d'exécution avec la question 10 : 

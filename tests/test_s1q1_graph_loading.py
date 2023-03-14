@@ -1,8 +1,8 @@
     """
     Test de la fonction graph_from_file
     """
-import sys 
-sys.path.append("delivery_network/")
+from os import chdir
+chdir("/home/onyxia/work/ensae-prog23/delivery_network")
 
 import unittest 
 from graph import Graph, graph_from_file

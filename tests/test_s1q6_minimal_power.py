@@ -3,8 +3,8 @@
     """
 
 # This will work if ran from the root folder.
-import sys 
-sys.path.append("delivery_network")
+from os import chdir
+chdir("/home/onyxia/work/ensae-prog23/delivery_network")
 
 from graph import graph_from_file
 import unittest   # The test framework
