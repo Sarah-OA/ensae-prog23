@@ -174,7 +174,57 @@ class Graph:
                 mst.union(parent, rank, x, y)
         return mst
 
+    def dfs_kruskal(self, sommet, parents, profondeurs, profondeur, deja_vu):
+        """
+        Parcours en profondeur d'un arbre couvrant de poids minimal, à partir d'un sommet, du dictionnaire de ses parents et profondeurs.
+        """
+        for voisin, puissance, distance in self.graph[sommet]:         
+            if voisin not in deja_vu:
+                profondeurs[voisin] = profondeur +1
+                parents[voisin]=(sommet, puissance)
+                deja_vu.append(voisin)
+                self.dfs_kruskal(voisin, parents, profondeurs, profondeur+1, deja_vu)
+
+    def resultat_dfs(self):
+        """
+        Exécute le parcours en profondeur un d'arbre couvrant de poids minimal.
+        Retourne un dictionnaire composé des éléments sommet : profondeur.
+        Retourne un dictionnaire composé des éléments sommet : parent.
+        """
+        profondeurs = {}
+        parents = {}
+        self.dfs_kruskal(1, parents, profondeurs, 0, [1])
+        profondeurs[1]=0
+        return (profondeurs, parents)
         
+    def min_power_kruskal(self, src, dest):
+        mst = self.kruskal()
+        profondeurs, parents = mst.resultat_dfs()
+        depart = [src]
+        arrivee = [dest]
+        a = src
+        b = dest
+        p_min = 0
+        while a != b:
+            if profondeurs[a]>profondeurs[b]:
+                a,p = parents[a]
+                depart.append(a)
+                if p>p_min:
+                    p_min = p
+            elif profondeurs[a]<profondeurs[b]:
+                b,p = parents[b]
+                arrivee = [b] + arrivee
+                if p>p_min:
+                    p_min = p
+            else:
+                a,p1 = parents[a]
+                b,p2 = parents[b]
+                depart.append(a)
+                arrivee = [b] + arrivee
+                if max(p1, p2)>p_min:
+                    p_min = max(p1, p2)
+        depart.pop()
+        return (depart + arrivee, p_min)
 
 def graph_from_file(filename):
     file = open(filename,'r', encoding="utf-8")

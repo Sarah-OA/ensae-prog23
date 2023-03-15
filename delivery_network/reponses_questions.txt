@@ -51,4 +51,9 @@ S2Q13 : voir test_s2q13_kruskal.py
 S2Q14 : voir graph.py et test_s2q14_min_power_kruskal.py.
 
 S2Q15 : complexité de l'algorithme de la question 14 :
+Complexité de dfs_kruskal : complexité d'un parcours en profondeur : O(nb_nodes + nb_edges). 
+Or dans un arbre couvrant de poids minimal, il y a au maximum 1 arète entre deux sommets, donc au total (nb_nodes - 1) arètes.
+Complexité totale : O(nb_edges*(nb_edges-1))
+Complexité de resultat_dfs : la même que celle de dfs_kruskal.
+-> Complexité de min_power_kruskal : 
 Comparaison des temps d'exécution avec la question 10 : 
