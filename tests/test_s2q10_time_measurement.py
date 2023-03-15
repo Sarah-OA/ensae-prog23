@@ -39,11 +39,10 @@ def estimation_temps_minpower(routes):
     return temps_minpower
 
 # Application des fonctions à chaque fichier routes et affichage du temps d'exécution
-"""
+
 test=open("/home/onyxia/work/ensae-prog23/input/routes.1.in", "r", encoding="utf-8")
 print("route 1 : ", estimation_temps_minpower(test))
 test.close()
-"""
 test=open("/home/onyxia/work/ensae-prog23/input/routes.2.in", "r", encoding="utf-8")
 print("route 2 :", estimation_temps_minpower(test))
 test.close()
