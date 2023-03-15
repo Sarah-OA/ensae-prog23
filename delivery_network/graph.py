@@ -137,53 +137,67 @@ class Graph:
         return None
 
     def trouve_la_racine(self, parent, i):
-        if parent[i] == i:
-            return i
-        return self.trouve_la_racine(parent, parent[i])
+        """ on code un graphe de la manière suivante: une liste "parent" de sorte que parent[i] soit la racine de l'élément i. 
+        Si un noeud est le sommet du de l'arbre, alors parent[noeud]=noeud.
+        La fonction trouve_la_racine renvoie la racine de l'élément i (le sommet de l'abre couvrant de poids minimal auquel i appartient)"""
+        if parent[i] == i: #i est-il racine? 
+            return i #si oui, on renvoie i
+        return self.trouve_la_racine(parent, parent[i]) #sinon, on renvoie la racine du parent de i
     
     def union(self, parent, rank, x, y):
+        """ La fonction union permet de faire créer un trajet entre les noeuds x et y. Il modifie donc la liste parent du graphe 
+        auquel x et y appartiennent pour actualiser leurs racines. Pour cela, on actualise la liste rank qui nous sert 
+        à savoir quel des deux noeuds mettre en parent"""
         x_racine = self.trouve_la_racine(parent, x)
         y_racine = self.trouve_la_racine(parent, y)
-        if rank[x_racine]<rank[y_racine]:
+        if rank[x_racine]<rank[y_racine]: #Si le rank de la racine de x est plus petit que celui de y, on prendra y parent de x
             parent[x_racine]=y_racine
-        elif rank[x_racine]>rank[y_racine]:
+        elif rank[x_racine]>rank[y_racine]: #Si le rank de la racine de x est plus grand que celui de y, on prendra x parent de y
             parent[y_racine]=x_racine
-        else:
+        else: #Si les racines de x et y ont le même rank, on prend arbitrairement x parent de y et on augement de rang de x
             parent[y_racine] = x_racine
             rank[x_racine] += 1   
 
     def kruskal(self):
-        mst = Graph([])
+        """ La fonction kruskal renvoie l'arbre couvrant de poids minimal de self."""
+        mst = Graph([]) #création d'un graphe vide
         i=0
-        e=0
-        liste_trajets_ranges = sorted(self.edges, key=lambda item: item[2])
-        parent =[]
+        e=0  # e compte le nombre d'arrêtes ajoutées au nouveau graphe
+        liste_trajets_ranges = sorted(self.edges, key=lambda item: item[2]) #on range les arrêtes de self selon leur poids
+        parent =[] 
         rank=[]
         for j in range(self.nb_nodes+1):
             parent.append(j)
             rank.append(0)
-        while e < (self.nb_nodes - 1) and i < len(liste_trajets_ranges):
+        # on initialise la liste parent représentant le nouveau graphe à [0, 1, ..., n] car au départ aucun noeuds ne sont reliés
+        # donc ils sont tous racine d'eux mêmes
+        # idem, rank =[0, ..., 0] car en l'absence de trajets reliant les noeurs, ils ont tous le même rang
+        
+        while e < (self.nb_nodes - 1) and i < len(liste_trajets_ranges): #pour un abre couvrant on veut que le nombre d'arrêtes = nombre de noeurds -1
             u, v, w = liste_trajets_ranges[i]
             i = i + 1
             x = self.trouve_la_racine(parent, u)
             y = self.trouve_la_racine(parent, v)
-            
+            #Si les racines de u et v sont identiques, alors créer un trajet entre u et v créerait un cycle
+            #(en effet on pourrait trouver un trajet de sorte que u->racine de u = racine de v-> v -> u)
             if x!= y:
+                #Si x et y sont différents, on rajoute un trajet entre x et y
                 e = e+1
-                mst.add_edge(u,v,w)
-                mst.union(parent, rank, x, y)
+                mst.add_edge(u,v,w) # on actualise notre graphe
+                mst.union(parent, rank, x, y) #on actualise les listes rank et parent représentant le nouveau graphe
         return mst
 
     def dfs_kruskal(self, sommet, parents, profondeurs, profondeur, deja_vu):
         """
-        Parcours en profondeur d'un arbre couvrant de poids minimal, à partir d'un sommet, du dictionnaire de ses parents et profondeurs.
+        Parcours en profondeur d'un arbre couvrant de poids minimal, à partir d'un sommet. La fonction renvoie le dictionnaire de ses parents et profondeurs.
         """
-        for voisin, puissance, distance in self.graph[sommet]:         
+        for voisin, puissance, distance in self.graph[sommet]: #en partant du sommet, on visite ses voisins si ceux-ci n'ont pas déjà été vus        
             if voisin not in deja_vu:
-                profondeurs[voisin] = profondeur +1
-                parents[voisin]=(sommet, puissance)
-                deja_vu.append(voisin)
-                self.dfs_kruskal(voisin, parents, profondeurs, profondeur+1, deja_vu)
+                profondeurs[voisin] = profondeur +1 #on actualise la profondeur du noeud qu'on visite
+                parents[voisin]=(sommet, puissance) #on actualise le parent du noeud qu'on visite
+                deja_vu.append(voisin) 
+                self.dfs_kruskal(voisin, parents, profondeurs, profondeur+1, deja_vu) #ensuite, on appelle la fonction en prenant alors comme sommet
+                #les voisins du sommet initial, parents et profondeurs ont été actualisés, et on incrémente la profondeur de 1 en descendant dans l'arbre
 
     def resultat_dfs(self):
         """
@@ -193,35 +207,40 @@ class Graph:
         """
         profondeurs = {}
         parents = {}
-        self.dfs_kruskal(1, parents, profondeurs, 0, [1])
-        profondeurs[1]=0
+        #on prend arbitrairement le noeud 1 comme sommet, la profondeur initale 
+        #est 0 et les dictionnaires parents et profondeurs sont vides
+        profondeurs[1]=0 #on atualise la profondeur de la racine (1) à 0
+        self.dfs_kruskal(1, parents, profondeurs, 0, [1]) #on applique la fonction à notre arbre ainsi qu'à nos dictionnaires qui 
+        #vont être modifiés
         return (profondeurs, parents)
         
     def min_power_kruskal(self, src, dest):
-        mst = self.kruskal()
-        profondeurs, parents = mst.resultat_dfs()
-        depart = [src]
-        arrivee = [dest]
-        a = src
-        b = dest
-        p_min = 0
-        while a != b:
-            if profondeurs[a]>profondeurs[b]:
+        """ La fonction renvoie une liste représentant le chemin à emprunter pour aller de src à dest ainsi que la puissance
+        minimale nécessaire pour effectuer ce trajet."""
+        mst = self.kruskal() #on réduit la complexité en utilisant l'arbre recouvrant de poids minimal
+        profondeurs, parents = mst.resultat_dfs() #on stocke les dictionnaires représentant les profondeurs et parents des noeuds
+        depart = [src] #chemin parcouru depuis le départ
+        arrivee = [dest] #chemin parcouru depuis l'arrivée
+        a = src # le "départ"
+        b = dest #l' "arrivée"
+        p_min = 0 #puissance minimale pour réaliser le trajet
+        while a != b: #tant que le départ et l'arrivée sont différents:
+            if profondeurs[a]>profondeurs[b]: #si a est un noeud plus profond que b, on remonte au parent de a
                 a,p = parents[a]
-                depart.append(a)
-                if p>p_min:
+                depart.append(a) #on actualise le chemin parcouru depuis le départ
+                if p>p_min: #si la puissance nécessaire à faire ce trajet est supérieure à p_min, on l'actualise
                     p_min = p
-            elif profondeurs[a]<profondeurs[b]:
+            elif profondeurs[a]<profondeurs[b]: # idem si b est un noeud plus profond que a
                 b,p = parents[b]
                 arrivee = [b] + arrivee
                 if p>p_min:
                     p_min = p
-            else:
+            else: # Si les deux noeuds sont à la même profondeur, ont revient aux parents de a et de b
                 a,p1 = parents[a]
                 b,p2 = parents[b]
-                depart.append(a)
+                depart.append(a) #cette fois ci les deux listes contenant le début et la fin du chemin sont actualisées
                 arrivee = [b] + arrivee
-                if max(p1, p2)>p_min:
+                if max(p1, p2)>p_min: #on considère le max des puissances des trajets parcourus pour actualiser p_min
                     p_min = max(p1, p2)
         depart.pop()
         return (depart + arrivee, p_min)

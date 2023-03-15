@@ -29,7 +29,7 @@ S1Q8 : voir test_s1q8_checking
 
 S1Q9 : non traitée
 
-S2Q10 : temps nécessaire pour calculer les trajets des fichiers routes
+S2Q10 : temps nécessaire pour calculer les trajets des fichiers routes (10 trajets)
 routes 1 : 4668.014040579088
 à partir du fichier routes_2, le calcul prend plus de 15 minutes et est donc trop long.
 voir test_s2q10_time_measurement
@@ -55,5 +55,6 @@ Complexité de dfs_kruskal : complexité d'un parcours en profondeur : O(nb_node
 Or dans un arbre couvrant de poids minimal, il y a au maximum 1 arète entre deux sommets, donc au total (nb_nodes - 1) arètes.
 Complexité totale : O(nb_edges*(nb_edges-1))
 Complexité de resultat_dfs : la même que celle de dfs_kruskal.
--> Complexité de min_power_kruskal : 
-Comparaison des temps d'exécution avec la question 10 : 
+-> Complexité de min_power_kruskal : l'étape la plus complexe est celle où on applique dfs_kruskal, donc la complexité est de O(nb_edges*(nb_edges-1)).
+Comparaison des temps d'exécution avec la question 10 : le temps pour calculer 2 trajets du fichier routes.1.in est de 210.61809141398408s.
+Ce temps est trop long.
