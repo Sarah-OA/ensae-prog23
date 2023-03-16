@@ -54,7 +54,16 @@ S2Q15 : complexité de l'algorithme de la question 14 :
 Complexité de dfs_kruskal : complexité d'un parcours en profondeur : O(nb_nodes + nb_edges). 
 Or dans un arbre couvrant de poids minimal, il y a au maximum 1 arète entre deux sommets, donc au total (nb_nodes - 1) arètes.
 Complexité totale : O(nb_edges*(nb_edges-1))
-Complexité de resultat_dfs : la même que celle de dfs_kruskal.
+Complexité de resultat_dfs : O(nb_nodes) dans le pire des cas on compare tous les sommets dans la boucle while.
 -> Complexité de min_power_kruskal : l'étape la plus complexe est celle où on applique dfs_kruskal, donc la complexité est de O(nb_edges*(nb_edges-1)).
-Comparaison des temps d'exécution avec la question 10 : le temps pour calculer 2 trajets du fichier routes.1.in est de 210.61809141398408s.
-Ce temps est trop long.
+Comparaison des temps d'exécution avec la question 10 (sur network.5.in ) : 
+Routes 1 : 5.681925515993498
+Routes 2 : 5.681925515993498
+Routes 3 : 27.868590758065693
+Routes 4 : 26.586996729951352
+Routes 5 : 5.605178950005211
+Routes 6 : 26.237283698981628
+Routes 7 : 27.801397586008534
+Routes 8 : 27.32267274602782
+Routes 9 : 28.225024774088524
+Le parcours en profondeur reste cependant assez long.

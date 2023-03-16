@@ -214,11 +214,9 @@ class Graph:
         #vont être modifiés
         return (profondeurs, parents)
         
-    def min_power_kruskal(self, src, dest):
+    def min_power_kruskal(self, profondeurs, parents, src, dest):
         """ La fonction renvoie une liste représentant le chemin à emprunter pour aller de src à dest ainsi que la puissance
         minimale nécessaire pour effectuer ce trajet."""
-        mst = self.kruskal() #on réduit la complexité en utilisant l'arbre recouvrant de poids minimal
-        profondeurs, parents = mst.resultat_dfs() #on stocke les dictionnaires représentant les profondeurs et parents des noeuds
         depart = [src] #chemin parcouru depuis le départ
         arrivee = [dest] #chemin parcouru depuis l'arrivée
         a = src # le "départ"
@@ -244,6 +242,37 @@ class Graph:
                     p_min = max(p1, p2)
         depart.pop()
         return (depart + arrivee, p_min)
+         
+    def minimiser_le_prix(self, profondeur, parents, camion, trajet, i): 
+        """ trouve le camion j le moins cher pour effectuer le trajet i """
+        l,a = self.min_power_kruskal(profondeur, parents, trajet[i][0], trajet[i][1])
+        
+        prix_min = float('inf')
+        camion_choisi = 0
+        for j in range(len(camion)):
+            if camion[j][0]>=a:
+                if camion[j][1]<prix_min:
+                    prix_min = camion[j][1]
+                    camion_choisi = j
+        if prix_min == float('inf'):
+            return None
+        else:
+            return camion[camion_choisi]
+
+    def knapSack(self, profondeur, parents, B, camions, trajets, n):
+        if n==0 or B==0:
+            return 0
+        if camions[n][1]>B:
+            return self.knapSack(profondeur, parents, B, camions, trajets, n-1)
+        else:
+            return max(trajets[n][2] + self.knapSack(profondeur, parents, B-camions[n][1], camions, trajets, n-1),self.knapSack(profondeur, parents, B, camions, trajets, n-1))
+
+    def optimisation(self, profondeur, parents, trucks, routes):
+        camions = lire_camions(trucks)
+        trajets = lire_trajets(routes)
+        camions_choisis = [self.minimiser_le_prix(self, profondeur, parents, camion, trajet, i) for i in range(len(trajets))]
+        B = 25*(10^9)
+        return self.knapSack(profondeur, parents, B, camions_choisis, trajets, len(trajets)-1)
 
 def graph_from_file(filename):
     file = open(filename,'r', encoding="utf-8")
