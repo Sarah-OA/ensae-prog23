@@ -259,20 +259,71 @@ class Graph:
         else:
             return camion[camion_choisi]
 
-    def knapSack(self, profondeur, parents, B, camions, trajets, n):
+    def knapSack(self, profondeur, parents, B, camions, trajets, n): 
         if n==0 or B==0:
             return 0
-        if camions[n][1]>B:
+        if camions[n]==None:
             return self.knapSack(profondeur, parents, B, camions, trajets, n-1)
         else:
-            return max(trajets[n][2] + self.knapSack(profondeur, parents, B-camions[n][1], camions, trajets, n-1),self.knapSack(profondeur, parents, B, camions, trajets, n-1))
+            if camions[n][1]>B:
+                return self.knapSack(profondeur, parents, B, camions, trajets, n-1)
+            else:
+                return max(trajets[n][2] + self.knapSack(profondeur, parents, B-camions[n][1], camions, trajets, n-1),self.knapSack(profondeur, parents, B, camions, trajets, n-1))
 
-    def optimisation(self, profondeur, parents, trucks, routes):
-        camions = lire_camions(trucks)
-        trajets = lire_trajets(routes)
-        camions_choisis = [self.minimiser_le_prix(self, profondeur, parents, camion, trajet, i) for i in range(len(trajets))]
-        B = 25*(10^9)
+    def optimisation(self, profondeur, parents, camions, trajets, B):
+        camions_choisis = [self.minimiser_le_prix(profondeur, parents, camions, trajets, i) for i in range(len(trajets))]
         return self.knapSack(profondeur, parents, B, camions_choisis, trajets, len(trajets)-1)
+
+    def lire_trajets(self, routes):
+        """
+        Lit les trajets présents dans un fichier route et retourne une liste de listes [départ, arrivée, utilité].
+        """
+        lines = routes.readlines()
+        L=[]
+        for line in lines[1:len(lines)]:
+            line=line.split(" ")
+            trajet=[int(line[0]), int(line[1]), int(line[2])]
+            L.append(trajet)
+        return L
+
+    def lire_camions(self, trucks):
+        """ Lit les camions présents dans un fichier trucks et retourne une liste de listes [puissance, prix]
+        """
+        lines = trucks.readlines()
+        L=[]
+        for line in lines[1:len(lines)]:
+            line=line.split(" ")
+            camion=[int(line[0]), int(line[1])]
+            L.append(camion)
+        return L
+
+    def greedy(self,profondeur,parents,camions,trajets,B):
+            profit = 0
+            resultat = []
+            camions_choisis = [self.minimiser_le_prix(profondeur, parents, camions, trajets, i) for i in range(len(trajets)-1)]
+            ratio = []
+            for i in range(len(camions_choisis)):
+                if camions_choisis != None:
+                    a = camions_choisis[i][1]
+                    b = trajets[i][2]
+                else:
+                    a=1
+                    b=0
+                ratio.append([b/a,i,a,b])
+            ratio_range = sorted(ratio, reverse=True, key=lambda item: item[0])
+            for i in range(len(ratio_range)):
+                if B>0 and ratio_range[i][2]<= B:
+                    B = B - ratio_range[i][2]
+                    profit = profit + ratio_range[i][3]
+                    resultat.append(ratio_range[i][1])
+            camion_final=[]
+            for i in resultat:
+                camion_final.append((trajets[i],camions_choisis[i]))
+            for i in resultat:
+                print('le trajet ', trajets[i], 'sera réalisé par le camion ', camions_choisis[i], '\n')
+            print('le profit est de ', profit,'\n')
+            return (profit,camion_final)
+
 
 def graph_from_file(filename):
     file = open(filename,'r', encoding="utf-8")
@@ -286,3 +337,4 @@ def graph_from_file(filename):
         else:
             g.add_edge(int(words[0]), int(words[1]), int(words[2]), int(words[3]))
     return(g)
+
