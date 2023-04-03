@@ -268,7 +268,7 @@ class Graph:
             if camions[n][1]>B:
                 return self.knapSack(profondeur, parents, B, camions, trajets, n-1)
             else:
-                return (max(trajets[n][2] + self.knapSack(profondeur, parents, B-camions[n][1], camions, trajets, n-1),self.knapSack(profondeur, parents, B, camions, trajets, n-1))
+                return (max(trajets[n][2] + self.knapSack(profondeur, parents, B-camions[n][1], camions, trajets, n-1),self.knapSack(profondeur, parents, B, camions, trajets, n-1)))
 
     def optimisation(self, profondeur, parents, camions, trajets, B):
         camions_choisis = [self.minimiser_le_prix(profondeur, parents, camions, trajets, i) for i in range(len(trajets))]
