@@ -280,7 +280,7 @@ class Graph:
                     return [b, L]
                 
     def optimisation(self, profondeur, parents, camions, trajets, B):
-        """ revoie le résultat de greedy """
+        """ revoie le résultat de knapsack """
         camions_choisis = [self.minimiser_le_prix(profondeur, parents, camions, trajets, i) for i in range(len(trajets))] #on associe camion et trajet
         c = self.knapSack(profondeur, parents, B, camions_choisis, trajets, len(trajets),[])
         L = []
@@ -305,31 +305,31 @@ class Graph:
         le résultat est de la forme: [profit, [(trajet,camion associé),...]] 
         avec trajet =[noeud1, noeud2, utilité] et camion = [puissance, prix]
         """
-            profit = 0
-            resultat = [] #contient les indices les trajets/camions sélectionnés
-            camions_choisis = [self.minimiser_le_prix(profondeur, parents, camions, trajets, i) for i in range(len(trajets)-1)] #on associe camion et trajet
-            ratio = []
-            for i in range(len(camions_choisis)): #lorsque c'est possible, on calcule le ratio utilité/prix
-                if camions_choisis != None:
-                    a = camions_choisis[i][1]
-                    b = trajets[i][2]
-                else:
-                    a=1
-                    b=0
-                ratio.append([b/a,i,a,b])
-            ratio_range = sorted(ratio, reverse=True, key=lambda item: item[0]) #on range les ratios dans l'ordre décroissant
-            for i in range(len(ratio_range)):
-                if B>0 and ratio_range[i][2]<= B: #si on a assez de budget, on sélectionne les trajets les plus avantageux
-                    B = B - ratio_range[i][2]
-                    profit = profit + ratio_range[i][3]
-                    resultat.append(ratio_range[i][1])
-            camion_final=[]
-            for i in resultat: #on construit la liste explicite des camions/trajets sélectionnés
-                camion_final.append((trajets[i],camions_choisis[i]))
-            for i in resultat:
-                print('le trajet ', trajets[i], 'sera réalisé par le camion ', camions_choisis[i], '\n')
-            print('le profit est de ', profit,'\n')
-            return (profit,camion_final)
+        profit = 0
+        resultat = [] #contient les indices les trajets/camions sélectionnés
+        camions_choisis = [self.minimiser_le_prix(profondeur, parents, camions, trajets, i) for i in range(len(trajets)-1)] #on associe camion et trajet
+        ratio = []
+        for i in range(len(camions_choisis)): #lorsque c'est possible, on calcule le ratio utilité/prix
+            if camions_choisis != None:
+                a = camions_choisis[i][1]
+                b = trajets[i][2]
+            else:
+                a=1
+                b=0
+            ratio.append([b/a,i,a,b])
+        ratio_range = sorted(ratio, reverse=True, key=lambda item: item[0]) #on range les ratios dans l'ordre décroissant
+        for i in range(len(ratio_range)):
+            if B>0 and ratio_range[i][2]<= B: #si on a assez de budget, on sélectionne les trajets les plus avantageux
+                B = B - ratio_range[i][2]
+                profit = profit + ratio_range[i][3]
+                resultat.append(ratio_range[i][1])
+        camion_final=[]
+        for i in resultat: #on construit la liste explicite des camions/trajets sélectionnés
+            camion_final.append((trajets[i],camions_choisis[i]))
+        for i in resultat:
+            print('le trajet ', trajets[i], 'sera réalisé par le camion ', camions_choisis[i], '\n')
+        print('le profit est de ', profit,'\n')
+        return (profit,camion_final)
 
 
 def graph_from_file(filename):
