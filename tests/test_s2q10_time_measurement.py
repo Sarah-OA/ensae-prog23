@@ -26,9 +26,9 @@ def estimation_temps_minpower(routes):
     Mesure et retourne le temps d'exécution moyen de min_power sur les trajets d'un fichier routes.
     On calcule le temps de 10 trajets puis on le multiplie par le nombre de trajets du fichier routes.
     """
-    t1=perf_counter()
     g=graph_from_file("/home/onyxia/work/ensae-prog23/input/network.2.in")
     trajets=lire_routes(routes)
+    t1=perf_counter()
     for i in range(1,10):
         src, dest = trajets[i]
         src = int(src)

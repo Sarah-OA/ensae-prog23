@@ -1,6 +1,6 @@
-    """
+"""
     Test de la fonction knapsack sur un petit graphe
-    """
+"""
 
 from os import chdir
 chdir("/home/onyxia/work/ensae-prog23/delivery_network")

@@ -1,5 +1,12 @@
-    """Test de la fonction greedy sur un gros graphe
-    """
+"""
+    Test de la fonction greedy sur un gros graphe
+"""
+from os import chdir
+chdir("/home/onyxia/work/ensae-prog23/delivery_network")
+
+import unittest 
+from graph import Graph, graph_from_file
+
 
 g=graph_from_file("/home/onyxia/work/ensae-prog23/input/network.2.in")
 arbre=g.kruskal()
