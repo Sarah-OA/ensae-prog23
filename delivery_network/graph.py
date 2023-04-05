@@ -1,6 +1,3 @@
-""" Définition de la classe Graph 
-"""
-
 class Graph:
     def __init__(self, nodes=[]):
         self.nodes = nodes
@@ -358,3 +355,18 @@ def graph_from_file(filename):
             g.add_edge(int(words[0]), int(words[1]), int(words[2]), int(words[3]))
     return(g)
 
+g = Graph([])
+g.add_edge(0,1,8)
+g.add_edge(0,2,8)
+g.add_edge(1,3,7)
+g.add_edge(1,4,2)
+g.add_edge(1,5,5)
+g.add_edge(3,7,20)
+g.add_edge(5,6,4)
+g.add_edge(2,8,20)
+trajets=[[7,6,20], [0,4,40], [1,8,10]]
+camions=[[20,30], [10,15], [5,8]]
+B=45
+profondeur, parent = g.resultat_dfs()
+camions_choisis = [g.minimiser_le_prix(profondeur, parent, camions, trajets, i) for i in range(len(trajets))]
+test=g.optimisation(profondeur, parent, camions, trajets, B)
