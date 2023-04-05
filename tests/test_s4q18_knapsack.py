@@ -14,9 +14,13 @@ routes=open("/home/onyxia/work/ensae-prog23/input/routes.02.in", "r", encoding="
 trucks=open("/home/onyxia/work/ensae-prog23/input/trucks.02.in", "r", encoding="utf-8")
 camions=arbre.lire_camions(trucks)
 trajets=arbre.lire_trajets(routes)
+temps1= perf_counter()
 camions_choisis=arbre.minimiser_le_prix(profondeur, parents, camions, trajets, 5)
 B=80
 resultat=arbre.optimisation(profondeur, parents, camions, trajets, B)
+temps2= perf_counter()
+temps_final= temps2 - temps1
 print("Profit : ", resultat)
 print("Trajets à parcourir :", routes_choix)
 print("Camions à choisir : ", camions_choisis)
+print(temps_final)

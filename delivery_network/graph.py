@@ -300,6 +300,19 @@ class Graph:
             L.append(camion)
         return L
 
+    def lire_routes(self, routes):
+        """
+        Lit les trajets présents dans un fichier route et retourne une liste de listes [départ, arrivée, utilité].
+        """
+        lines = routes.readlines()
+        L=[]
+        for line in lines[1:len(lines)]:
+            line=line.split(" ")
+            trajet=[int(line[0]), int(line[1]), int(line[2])]
+            L.append(trajet)
+        return L
+
+
     def greedy(self,profondeur,parents,camions,trajets,B):
         """
         le résultat est de la forme: [profit, [(trajet,camion associé),...]] 
