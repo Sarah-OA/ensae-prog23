@@ -4,6 +4,7 @@
 
 from os import chdir
 chdir("/home/onyxia/work/ensae-prog23/delivery_network")
+import graphviz
 from generate_graphviz import graphviz_generate_graph, get_path_with_power_graphviz
 from graph import Graph, graph_from_file
 

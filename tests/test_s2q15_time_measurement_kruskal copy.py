@@ -44,21 +44,21 @@ g=graph_from_file("/home/onyxia/work/ensae-prog23/input/network.5.in")
 mst = g.kruskal() #on réduit la complexité en utilisant l'arbre recouvrant de poids minimal
 profondeurs, parents = mst.resultat_dfs() #on stocke les dictionnaires représentant les profondeurs et parents des noeuds
 
-sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route1.txt", "w", encoding="utf-8")
+sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.1.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.1.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)
 fichier = estimation_temps_minpower_k(mst,profondeurs, parents, routes, sortie)
 sortie.close()
 routes.close()
 
-sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route2.txt", "w", encoding="utf-8")
+sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.2.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.2.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)
 fichier = estimation_temps_minpower_k(mst,profondeurs, parents, routes, sortie)
 sortie.close()
 routes.close()
 
-sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route3.txt", "w", encoding="utf-8")
+sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.3.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.3.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)
 fichier = estimation_temps_minpower_k(mst,profondeurs, parents, routes, sortie)
@@ -66,7 +66,7 @@ sortie.close()
 routes.close()
 
 
-sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route4.txt", "w", encoding="utf-8")
+sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.4.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.4.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)
 fichier = estimation_temps_minpower_k(mst,profondeurs, parents, routes, sortie)
@@ -74,14 +74,14 @@ sortie.close()
 routes.close()
 
 
-sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route5.txt", "w", encoding="utf-8")
+sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.5.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.5.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)
 fichier = estimation_temps_minpower_k(mst,profondeurs, parents, routes, sortie)
 sortie.close()
 routes.close()
 
-sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route6.txt", "w", encoding="utf-8")
+sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.6.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.6.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)
 fichier = estimation_temps_minpower_k(mst,profondeurs, parents, routes, sortie)
@@ -89,7 +89,7 @@ sortie.close()
 routes.close()
 
 
-sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route7.txt", "w", encoding="utf-8")
+sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.7.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.7.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)
 fichier = estimation_temps_minpower_k(mst,profondeurs, parents, routes, sortie)
@@ -97,7 +97,7 @@ sortie.close()
 routes.close()
 
 
-sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route8.txt", "w", encoding="utf-8")
+sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.8.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.8.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)
 fichier = estimation_temps_minpower_k(mst,profondeurs, parents, routes, sortie)
@@ -105,7 +105,7 @@ sortie.close()
 routes.close()
 
 
-sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route9.txt", "w", encoding="utf-8")
+sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.9.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.9.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)
 fichier = estimation_temps_minpower_k(mst,profondeurs, parents, routes, sortie)
