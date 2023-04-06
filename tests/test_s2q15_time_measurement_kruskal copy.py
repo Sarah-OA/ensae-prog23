@@ -41,9 +41,12 @@ def estimation_temps_minpower_k(graphe, profondeurs, parents, routes, fichier_so
     return fichier_sortie
 # Application des fonctions à chaque fichier routes et affichage du temps d'exécution
 g=graph_from_file("/home/onyxia/work/ensae-prog23/input/network.5.in")
+t3=perf_counter()
 mst = g.kruskal() #on réduit la complexité en utilisant l'arbre recouvrant de poids minimal
 profondeurs, parents = mst.resultat_dfs() #on stocke les dictionnaires représentant les profondeurs et parents des noeuds
-
+t4=perf_counter()
+temps_dfs=t4-t3 # Mesure du temps du dfs
+print(temps_dfs)
 sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.1.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.1.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)
