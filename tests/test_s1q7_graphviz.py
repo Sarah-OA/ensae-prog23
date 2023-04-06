@@ -16,4 +16,3 @@ dessin1=get_path_with_power_graphviz(graphe_chemin1, graphe1, 1, 3, 1)
 # Test sur un graphe plus grand
 graphe2=graph_from_file("/home/onyxia/work/ensae-prog23/input/network.1.in")
 graphe_chemin2=graphviz_generate_graph(graphe2)
-dessin2=get_path_with_power_graphviz(graphe_chemin2, graphe2, 4, 16, 40)

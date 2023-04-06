@@ -39,8 +39,10 @@ def estimation_temps_minpower_k(graphe, profondeurs, parents, routes, fichier_so
     temps_total=t2-t1
     print(temps_total)
     return fichier_sortie
+ 
 # Application des fonctions à chaque fichier routes et affichage du temps d'exécution
-g=graph_from_file("/home/onyxia/work/ensae-prog23/input/network.5.in")
+
+g=graph_from_file("/home/onyxia/work/ensae-prog23/input/network.1.in")
 t3=perf_counter()
 mst = g.kruskal() #on réduit la complexité en utilisant l'arbre recouvrant de poids minimal
 profondeurs, parents = mst.resultat_dfs() #on stocke les dictionnaires représentant les profondeurs et parents des noeuds
@@ -54,6 +56,13 @@ fichier = estimation_temps_minpower_k(mst,profondeurs, parents, routes, sortie)
 sortie.close()
 routes.close()
 
+g=graph_from_file("/home/onyxia/work/ensae-prog23/input/network.2.in")
+t3=perf_counter()
+mst = g.kruskal() #on réduit la complexité en utilisant l'arbre recouvrant de poids minimal
+profondeurs, parents = mst.resultat_dfs() #on stocke les dictionnaires représentant les profondeurs et parents des noeuds
+t4=perf_counter()
+temps_dfs=t4-t3 # Mesure du temps du dfs
+print(temps_dfs)
 sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.2.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.2.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)
@@ -61,6 +70,13 @@ fichier = estimation_temps_minpower_k(mst,profondeurs, parents, routes, sortie)
 sortie.close()
 routes.close()
 
+g=graph_from_file("/home/onyxia/work/ensae-prog23/input/network.3.in")
+t3=perf_counter()
+mst = g.kruskal() #on réduit la complexité en utilisant l'arbre recouvrant de poids minimal
+profondeurs, parents = mst.resultat_dfs() #on stocke les dictionnaires représentant les profondeurs et parents des noeuds
+t4=perf_counter()
+temps_dfs=t4-t3 # Mesure du temps du dfs
+print(temps_dfs)
 sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.3.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.3.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)
@@ -68,7 +84,13 @@ fichier = estimation_temps_minpower_k(mst,profondeurs, parents, routes, sortie)
 sortie.close()
 routes.close()
 
-
+g=graph_from_file("/home/onyxia/work/ensae-prog23/input/network.4.in")
+t3=perf_counter()
+mst = g.kruskal() #on réduit la complexité en utilisant l'arbre recouvrant de poids minimal
+profondeurs, parents = mst.resultat_dfs() #on stocke les dictionnaires représentant les profondeurs et parents des noeuds
+t4=perf_counter()
+temps_dfs=t4-t3 # Mesure du temps du dfs
+print(temps_dfs)
 sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.4.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.4.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)
@@ -76,7 +98,13 @@ fichier = estimation_temps_minpower_k(mst,profondeurs, parents, routes, sortie)
 sortie.close()
 routes.close()
 
-
+g=graph_from_file("/home/onyxia/work/ensae-prog23/input/network.5.in")
+t3=perf_counter()
+mst = g.kruskal() #on réduit la complexité en utilisant l'arbre recouvrant de poids minimal
+profondeurs, parents = mst.resultat_dfs() #on stocke les dictionnaires représentant les profondeurs et parents des noeuds
+t4=perf_counter()
+temps_dfs=t4-t3 # Mesure du temps du dfs
+print(temps_dfs)
 sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.5.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.5.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)
@@ -84,6 +112,13 @@ fichier = estimation_temps_minpower_k(mst,profondeurs, parents, routes, sortie)
 sortie.close()
 routes.close()
 
+g=graph_from_file("/home/onyxia/work/ensae-prog23/input/network.6.in")
+t3=perf_counter()
+mst = g.kruskal() #on réduit la complexité en utilisant l'arbre recouvrant de poids minimal
+profondeurs, parents = mst.resultat_dfs() #on stocke les dictionnaires représentant les profondeurs et parents des noeuds
+t4=perf_counter()
+temps_dfs=t4-t3 # Mesure du temps du dfs
+print(temps_dfs)
 sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.6.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.6.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)
@@ -91,7 +126,13 @@ fichier = estimation_temps_minpower_k(mst,profondeurs, parents, routes, sortie)
 sortie.close()
 routes.close()
 
-
+g=graph_from_file("/home/onyxia/work/ensae-prog23/input/network.7.in")
+t3=perf_counter()
+mst = g.kruskal() #on réduit la complexité en utilisant l'arbre recouvrant de poids minimal
+profondeurs, parents = mst.resultat_dfs() #on stocke les dictionnaires représentant les profondeurs et parents des noeuds
+t4=perf_counter()
+temps_dfs=t4-t3 # Mesure du temps du dfs
+print(temps_dfs)
 sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.7.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.7.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)
@@ -99,7 +140,13 @@ fichier = estimation_temps_minpower_k(mst,profondeurs, parents, routes, sortie)
 sortie.close()
 routes.close()
 
-
+g=graph_from_file("/home/onyxia/work/ensae-prog23/input/network.8.in")
+t3=perf_counter()
+mst = g.kruskal() #on réduit la complexité en utilisant l'arbre recouvrant de poids minimal
+profondeurs, parents = mst.resultat_dfs() #on stocke les dictionnaires représentant les profondeurs et parents des noeuds
+t4=perf_counter()
+temps_dfs=t4-t3 # Mesure du temps du dfs
+print(temps_dfs)
 sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.8.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.8.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)
@@ -107,7 +154,13 @@ fichier = estimation_temps_minpower_k(mst,profondeurs, parents, routes, sortie)
 sortie.close()
 routes.close()
 
-
+g=graph_from_file("/home/onyxia/work/ensae-prog23/input/network.9.in")
+t3=perf_counter()
+mst = g.kruskal() #on réduit la complexité en utilisant l'arbre recouvrant de poids minimal
+profondeurs, parents = mst.resultat_dfs() #on stocke les dictionnaires représentant les profondeurs et parents des noeuds
+t4=perf_counter()
+temps_dfs=t4-t3 # Mesure du temps du dfs
+print(temps_dfs)
 sortie=open("/home/onyxia/work/ensae-prog23/fichiers_tests_routes/route.9.out", "w", encoding="utf-8")
 routes=open("/home/onyxia/work/ensae-prog23/input/routes.9.in", "r", encoding="utf-8")
 trajets=lire_routes(routes)

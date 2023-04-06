@@ -119,6 +119,4 @@ graph Graphe {
 	14 -- 16
 	18 -- 4
 	13 -- 20
-	4 -- 5 [color=red]
-	12 -- 13 [color=red]
 }
